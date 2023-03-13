@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;700&display=swap');
+
+body {
+  font-family: "Golos Text";
+}
+
+ul.itemList {
+  padding: 1em;
+  margin: none;
+  background-color: #efefef;
+  list-style: none;
+}
+
+li.item {
+  margin-left: 0;
+  margin-bottom: 1em;
+}
+
+button {
+  background-color: orange;
+  padding: .5em;
+  border-radius: .4em;
+  color: black;
+  font-weight: bolder;
+  border: 1px solid black;
+  font-family: "Golos Text";
+}
+
+input {
+  font-family: "Golos Text";
+  padding: .4em;
+  margin-right: 1em;
+}
