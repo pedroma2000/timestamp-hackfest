@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;700&display=swap');
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Golos Text';
+}
+
+.app-header {
+  margin-top: 50px;
+  width: 95%;
+  color: white;
+  font-weight: bolder;
+  font-size: 52px;
+  display: flex;
+  flex-direction: row;
+}
+
+.inventory-icon {
+  color: rgb(219, 164, 120);
+  padding-top: 10px;
+  padding-right: 20px;
+  margin-left: 25px;
+  font-size: 48px;
+}
+
+.app-button-box {
+  width: 80%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mButton {
+  width: 15%;
+  background-color: royalblue;
+  padding: 8px;
+  padding-inline: 16px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  font-family: 'Golos Text';
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.mButton:hover {
+  background-color: rgb(55, 88, 185);
+  cursor: pointer;
+}
+
+.text-input {
+  width: 30%;
+  background-color: white;
+  padding: 8px;
+  padding-inline: 16px;
+  border: 0;
+  border-radius: 8px;
+  font-family: 'Golos Text';
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.app-product-list {
+  width: 80%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*
+ * -----------PRODUCT ROW------------
+ */
+
+.product-row {
+  background-color: brown;
+  margin-top: 15px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-uuid {
+  width: 20%;
+  margin-left: 20px;
+}
+
+.product-title {
+  width: 50%;
+}
+
+.product-cost {
+  width: 30%;
+  margin-right: 20px;
+}
+
+.product-label {
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.product-value {
+  margin-left: 10px;
+}
+
+.emptyList-label {
+  padding-top: 10%;
+  height: 10%;
+  color: white;
+  font-weight: normal;
+  font-size: 40px;
+}
+
+/*
+ * ----------------------------------
+ */
