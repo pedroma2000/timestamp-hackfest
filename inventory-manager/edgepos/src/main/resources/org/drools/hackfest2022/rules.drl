@@ -1,0 +1,83 @@
+package org.drools.hackfest2022;
+
+unit BillUnitData;
+
+import org.drools.hackfest2022.model.*;
+
+import function org.drools.hackfest2022.Utils.sum;
+import function org.drools.hackfest2022.Utils.round;
+
+rule RecordSNtoLoyaltyID
+when
+    $id: /loyaltyID
+    $i: /items[sn != null]
+then
+    logs.add("Item '"+$i.getShortdesc()+"' serial no.: "+$i.getSn()+" associated with Loyalty card ID: "+$id);
+end
+
+rule RecordSNnoLoyaltyID
+when
+    not( /loyaltyID )
+    $i: /items[sn != null]
+then
+    alerts.add(new Alert($i, "Don't forget to scan your Loyalty card for additional customer service benefits."));
+end
+
+rule CouponOFF5
+when
+    exists( /coupons[ code == "OFF5" ] )
+    not( /coupons[ code != "OFF5"] ) // not cumulable with other discounts
+    accumulate( /items[$p: price]; $subtotal: sum($p); $subtotal >= 50 )
+then
+    discount.set( -round($subtotal * 0.05, 2) );
+end
+
+rule CheckID
+when
+    $i: /items[category == ItemCategory.ALCOHOL || category == ItemCategory.TOBACCO]
+then
+    alerts.add(new Alert($i, "Need to show ID to merchant before checkout."));
+end
+
+rule OrangeGroceryPrice
+when
+    $i: /items[category == ItemCategory.GROCERY, shortdesc soundslike "Orange", price/weight > 1.52*1.10]
+then
+    alerts.add(new Alert($i, "Was item weighted correctly at the self-service station?"));
+end
+
+rule AppleGroceryPrice
+when
+    $i: /items[category == ItemCategory.GROCERY, shortdesc soundslike "Apple", price/weight > 1.69*1.10]
+then
+    alerts.add(new Alert($i, "Was item weighted correctly at the self-service station?"));
+end
+
+rule KiwiGroceryPrice
+when
+    $i: /items[category == ItemCategory.GROCERY, shortdesc soundslike "Kiwi", price/weight > 3.78*1.10]
+then
+    alerts.add(new Alert($i, "Was item weighted correctly at the self-service station?"));
+end
+
+rule ExpensiveItemMaybeScannedTwice
+when
+    $i: /items[price > 30.0, $iBarcode: barcode]
+    $j: /items[this != $i, barcode == $iBarcode]
+    not( /alerts[subject.barcode == $iBarcode, message == "Please check you have not scanned this item more than once?"] )
+then
+    alerts.add(new Alert($i, "Please check you have not scanned this item more than once?"));
+end
+
+rule ComputeTOTAL
+when
+    accumulate( /items[$p: price]; $sub: sum($p) )
+    $discount: /discount
+then
+    subtotal.set($sub);
+    total.set(sum($sub, $discount));
+end
+
+query Alert
+    $a: /alerts
+end

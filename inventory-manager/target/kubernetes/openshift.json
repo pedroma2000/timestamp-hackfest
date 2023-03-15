@@ -1,0 +1,166 @@
+[{
+  "apiVersion" : "apps.openshift.io/v1",
+  "kind" : "DeploymentConfig",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/commit-id" : "5ae2d0991ef97a25a85c6a3a9e8ee334c84e4b4d",
+      "app.quarkus.io/build-timestamp" : "2023-03-14 - 17:57:40 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "code-with-quarkus",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "code-with-quarkus"
+  },
+  "spec" : {
+    "replicas" : 1,
+    "selector" : {
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.kubernetes.io/name" : "code-with-quarkus"
+    },
+    "template" : {
+      "metadata" : {
+        "annotations" : {
+          "app.openshift.io/vcs-url" : "<<unknown>>",
+          "app.quarkus.io/commit-id" : "5ae2d0991ef97a25a85c6a3a9e8ee334c84e4b4d",
+          "app.quarkus.io/build-timestamp" : "2023-03-14 - 17:57:40 +0000"
+        },
+        "labels" : {
+          "app.kubernetes.io/name" : "code-with-quarkus",
+          "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+          "app.openshift.io/runtime" : "quarkus"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          }, {
+            "name" : "JAVA_APP_JAR",
+            "value" : "/deployments/quarkus-run.jar"
+          } ],
+          "image" : "pedro/code-with-quarkus:1.0.0-SNAPSHOT",
+          "imagePullPolicy" : "Always",
+          "name" : "code-with-quarkus",
+          "ports" : [ {
+            "containerPort" : 8080,
+            "name" : "http",
+            "protocol" : "TCP"
+          } ]
+        } ]
+      }
+    },
+    "triggers" : [ {
+      "imageChangeParams" : {
+        "automatic" : true,
+        "containerNames" : [ "code-with-quarkus" ],
+        "from" : {
+          "kind" : "ImageStreamTag",
+          "name" : "code-with-quarkus:1.0.0-SNAPSHOT"
+        }
+      },
+      "type" : "ImageChange"
+    } ]
+  }
+},{
+  "apiVersion" : "v1",
+  "kind" : "Service",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/commit-id" : "5ae2d0991ef97a25a85c6a3a9e8ee334c84e4b4d",
+      "app.quarkus.io/build-timestamp" : "2023-03-14 - 17:57:40 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "code-with-quarkus",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "code-with-quarkus"
+  },
+  "spec" : {
+    "ports" : [ {
+      "name" : "http",
+      "port" : 80,
+      "protocol" : "TCP",
+      "targetPort" : 8080
+    } ],
+    "selector" : {
+      "app.kubernetes.io/name" : "code-with-quarkus",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "type" : "ClusterIP"
+  }
+},{
+  "apiVersion" : "image.openshift.io/v1",
+  "kind" : "ImageStream",
+  "metadata" : {
+    "labels" : {
+      "app.kubernetes.io/name" : "code-with-quarkus",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "name" : "s2i-java"
+  },
+  "spec" : {
+    "dockerImageRepository" : "fabric8/s2i-java"
+  }
+},{
+  "apiVersion" : "image.openshift.io/v1",
+  "kind" : "ImageStream",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/commit-id" : "5ae2d0991ef97a25a85c6a3a9e8ee334c84e4b4d",
+      "app.quarkus.io/build-timestamp" : "2023-03-14 - 17:57:40 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "code-with-quarkus",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "code-with-quarkus"
+  },
+  "spec" : { }
+},{
+  "apiVersion" : "build.openshift.io/v1",
+  "kind" : "BuildConfig",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/commit-id" : "5ae2d0991ef97a25a85c6a3a9e8ee334c84e4b4d",
+      "app.quarkus.io/build-timestamp" : "2023-03-14 - 17:57:40 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "code-with-quarkus",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "code-with-quarkus"
+  },
+  "spec" : {
+    "output" : {
+      "to" : {
+        "kind" : "ImageStreamTag",
+        "name" : "code-with-quarkus:1.0.0-SNAPSHOT"
+      }
+    },
+    "source" : {
+      "binary" : { }
+    },
+    "strategy" : {
+      "sourceStrategy" : {
+        "from" : {
+          "kind" : "ImageStreamTag",
+          "name" : "s2i-java:2.3"
+        }
+      }
+    }
+  }
+}]
