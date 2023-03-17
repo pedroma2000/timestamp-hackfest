@@ -124,3 +124,84 @@
 /*
  * ----------------------------------
  */
+
+/*
+ * -----------ADD PRODUCT POPUP------------
+ */
+
+ .popup-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.add-popup.body {
+  background-color: white;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  font-family: 'Golos Text';
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.add-popup.bar {
+  background-color: rgb(55, 88, 185);
+  width: 100%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.add-popup.title {
+  font-weight: bolder;
+  font-size: 30px;
+  margin-left: 5%;
+  padding-block: 20px;
+}
+
+.add-popup.close {
+  font-weight: bolder;
+  font-size: 32px;
+  margin-right: 5%;
+}
+
+.add-popup.close:hover {
+  color: rgba(255, 255, 255, 0.507);
+  cursor: pointer;
+}
+
+.add-popup.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-input.productName {
+  background-color: rgb(205, 205, 205);
+  width: 80%;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.text-input.productCost {
+  background-color: rgb(205, 205, 205);
+  width: 80%;
+  font-size: 16px;
+  margin-block: 10px;
+}
+
+.mButton.popup {
+  width: 50%;
+  margin-block: 20px;
+}
+
+/*
+ * ----------------------------------
+ */

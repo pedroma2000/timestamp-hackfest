@@ -6,6 +6,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,6 +37,7 @@ public class InventoryApi {
     }
 
     @POST
+    @Transactional
     public Response createProduct(Product product) {
         if (product.id != null) {
             throw new WebApplicationException("Id was invalidly set on request.", 422);
