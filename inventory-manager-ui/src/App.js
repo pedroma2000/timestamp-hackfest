@@ -116,7 +116,7 @@ function App() {
                     ID:
                   </div>
                   <div className='product-value'>
-                    {product.uuid}
+                    {product.id}
                   </div>
                 </div> 
                 <div className='product-title'>
@@ -132,7 +132,7 @@ function App() {
                   Cost:
                   </div>
                   <div className='product-value'>
-                    {product.cost}
+                    {product.cost}$
                   </div>
                 </div> 
               </div>
