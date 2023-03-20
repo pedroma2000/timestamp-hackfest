@@ -5,7 +5,7 @@ import { IoClose } from 'react-icons/io5'
 import { Popup } from 'reactjs-popup'
 import axios from 'axios'
 
-import { productList } from './template_files/productlist'
+//import { productList } from './template_files/productlist'
 
 function App() {
 
@@ -13,6 +13,8 @@ function App() {
   const [product_name_input, setProductName] = useState("")
   const [product_cost_input, setProductCost] = useState("")
   const [addPopup, setAddPopup] = useState(false)
+  const [productList, setProductList] = useState([])
+
   const input_change = newVal => {
     setInput(newVal.target.value)
   }
@@ -25,6 +27,13 @@ function App() {
     setProductCost(newVal.target.value)
   }
 
+  axios
+    .get("http://localhost:8080/product")
+    .then((response) => {
+      setProductList(response.data)
+    })
+    .catch((err) => console.log(err))
+
   const filtered_products = productList.filter((product) =>
     product.title.toLowerCase().includes(search_input.toLowerCase())
   )
@@ -34,7 +43,6 @@ function App() {
   }
 
   const postProduct = () => {
-
     axios
       .post("http://localhost:8080/product", {
         title: product_name_input,
@@ -101,8 +109,8 @@ function App() {
       <div className='app-product-list'>
         {
           filtered_products.length ? 
-            filtered_products.map((product) => 
-              <div className='product-row'> 
+            filtered_products.map((product, index) => 
+              <div key={index} className='product-row'> 
                 <div className='product-uuid'> 
                   <div className='product-label'>
                     ID:
